@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Record
 
 
 class SignUpForm(UserCreationForm):
@@ -37,3 +38,32 @@ class SignUpForm(UserCreationForm):
         self.fields[
             'password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'
 
+
+class AddRecordForm(forms.ModelForm):
+    first_name = forms.CharField(label='', required=True,
+                                 widget=forms.widgets.TextInput(
+                                     attrs={'placeholder': 'First name', 'class': 'form-control'}))
+    last_name = forms.CharField(label='', required=True,
+                                widget=forms.widgets.TextInput(
+                                    attrs={'placeholder': 'Last name', 'class': 'form-control'}))
+    email = forms.CharField(label='', required=True,
+                            widget=forms.widgets.TextInput(
+                                attrs={'placeholder': 'Email', 'class': 'form-control'}))
+    phone = forms.CharField(label='', required=True,
+                            widget=forms.widgets.TextInput(
+                                attrs={'placeholder': 'Phone', 'class': 'form-control'}))
+    address = forms.CharField(label='', required=True,
+                              widget=forms.widgets.TextInput(
+                                  attrs={'placeholder': 'Address', 'class': 'form-control'}))
+    city = forms.CharField(label='', required=True,
+                           widget=forms.widgets.TextInput(attrs={'placeholder': 'City', 'class': 'form-control'}))
+    state = forms.CharField(label='', required=True,
+                            widget=forms.widgets.TextInput(
+                                attrs={'placeholder': 'State', 'class': 'form-control'}))
+    zip_code = forms.CharField(label='', required=True,
+                               widget=forms.widgets.TextInput(
+                                   attrs={'placeholder': 'Zip code', 'class': 'form-control'}))
+
+    class Meta:
+        model = Record
+        exclude = ("user",)
